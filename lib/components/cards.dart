@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 
 class CardComponent extends StatelessWidget {
+  int id;
   String img;
   String title;
   String categoria;
 
-  CardComponent(String img, String title, String categoria) {
+  CardComponent(int id, String img, String title, String categoria) {
+    this.id = id;
     this.img = img;
     this.title = title;
     this.categoria = categoria;
   }
 
-  static CardBuild(String img, String title, String categoria) {
+  static CardBuild(int id, String img, String title, String categoria) {
     return Card(
+      margin: EdgeInsets.fromLTRB(15, 15, 15, 30),
       clipBehavior: Clip.antiAliasWithSaveLayer,
       shadowColor: Colors.lightBlue,
       child: InkWell(
@@ -23,7 +26,7 @@ class CardComponent extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Image.network(img, fit: BoxFit.none, width: 350.0, height: 340.0),
+            Image.network(img, repeat: ImageRepeat.noRepeat),
             Padding(
               padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
               child: Text(title, style: TextStyle(
@@ -47,6 +50,6 @@ class CardComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CardBuild(img, title, categoria);
+    return CardBuild(id, img, title, categoria);
   }
 }
