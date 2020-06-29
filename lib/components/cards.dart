@@ -20,7 +20,7 @@ class CardComponent extends StatelessWidget {
       shadowColor: Colors.lightBlue,
       child: InkWell(
         onTap: () {
-          print("Card Pressionado");
+          print("Card ${id} Pressionado");
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
