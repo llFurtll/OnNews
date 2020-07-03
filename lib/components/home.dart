@@ -13,7 +13,6 @@ class Home extends StatefulWidget {
 class HomeState extends State<Home> {
   Future<List<Noticia>> futureNoticia;
 
-
   @override
   initState() {
     super.initState();
@@ -34,12 +33,7 @@ class HomeState extends State<Home> {
         return ListView.builder(
           itemCount: 50,
           itemBuilder: (context, index) {
-            return CardComponent(
-              snapshot.data[index].id,
-              snapshot.data[index].img, 
-              snapshot.data[index].title,
-              snapshot.data[index].categoria.first
-            );
+            return CardComponent(noticia: snapshot.data[index],);
           },
         );
       }
