@@ -32,8 +32,8 @@ class NoticiaDetalhe extends StatelessWidget {
           style: {
             "h2": Style(
               color: Colors.white,
-              alignment: Alignment.topLeft,
               padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+              margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
             ),
           },
           ),

@@ -5,6 +5,7 @@ class AppBarComponent extends StatelessWidget {
     return AppBar(
       title: Text("On News"),
       centerTitle: true,
+      automaticallyImplyLeading: false,
     );
   }
 

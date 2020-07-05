@@ -4,6 +4,7 @@ import 'package:OnNews/api/noticias.dart';
 import 'package:flutter/material.dart';
 import 'appbar.dart';
 import 'cards.dart';
+import 'drawer.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -66,10 +67,14 @@ class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      primary: true,
       appBar: AppBarComponent().build(context),
 
-      body: Center(
-        child: buildList(),
+      body: Scaffold(
+        drawer: DrawerComponent(),
+        body: Center(
+          child: buildList(),
+        ),
       ),
 
       floatingActionButton: buildFloatAction(),
