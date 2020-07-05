@@ -14,6 +14,8 @@ class Home extends StatefulWidget {
 class HomeState extends State<Home> {
   Future<List<Noticia>> futureNoticia;
 
+  GlobalKey<ScaffoldState> keyScaffold = GlobalKey<ScaffoldState>();
+
   @override
   initState() {
     super.initState();
@@ -22,23 +24,24 @@ class HomeState extends State<Home> {
 
   buildList() {
     return FutureBuilder<List<Noticia>>(
-      future: futureNoticia,
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          return Center(
-            child: CircularProgressIndicator(), 
+        future: futureNoticia,
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (snapshot.hasError) {
+            return Text("$snapshot.error");
+          }
+          return ListView.builder(
+            itemCount: 100,
+            itemBuilder: (context, index) {
+              return CardComponent(
+                noticia: snapshot.data[index],
+              );
+            },
           );
-        } else if (snapshot.hasError) {
-          return Text("$snapshot.error");
-        }
-        return ListView.builder(
-          itemCount: 50,
-          itemBuilder: (context, index) {
-            return CardComponent(noticia: snapshot.data[index],);
-          },
-        );
-      }
-    );
+        });
   }
 
   buildFloatAction() {
@@ -69,15 +72,14 @@ class HomeState extends State<Home> {
     return Scaffold(
       primary: true,
       appBar: AppBarComponent().build(context),
-
-      body: Scaffold(
-        drawer: DrawerComponent(),
-        body: Center(
+      drawer: Container(
+        child: DrawerComponent(),
+        padding: EdgeInsets.fromLTRB(0, 80.0, 0, 0),
+      ),
+      body: Center(
           child: buildList(),
         ),
-      ),
-
       floatingActionButton: buildFloatAction(),
     );
-  } 
+  }
 }

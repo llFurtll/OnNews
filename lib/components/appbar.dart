@@ -1,16 +1,16 @@
 import "package:flutter/material.dart";
 
 class AppBarComponent extends StatelessWidget {
-  static AppBarBuild() {
+  static AppBarBuild(BuildContext context) {
     return AppBar(
       title: Text("On News"),
       centerTitle: true,
-      automaticallyImplyLeading: false,
+      backgroundColor: Theme.of(context).accentColor,
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return AppBarBuild();
+    return AppBarBuild(context);
   }
 }

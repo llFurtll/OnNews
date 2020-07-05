@@ -32,7 +32,9 @@ class CardComponent extends StatelessWidget {
               data: "<h2>${noticia.title}<h2>",
               style: {
                 "h2": Style(
-                  padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                  textAlign: TextAlign.start,
+                  margin: EdgeInsets.zero,
+                  padding: EdgeInsets.zero,
                 ),
               }
             ),
@@ -40,7 +42,7 @@ class CardComponent extends StatelessWidget {
               padding: EdgeInsets.fromLTRB(10, 0, 0, 10),
               child: Text(noticia.categoria.first, style: TextStyle(
                 fontSize: 20.0,
-                color: Colors.purple,
+                color: Theme.of(context).accentColor,
               ),),
             ),
           ],

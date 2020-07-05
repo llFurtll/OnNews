@@ -27,17 +27,18 @@ class NoticiaDetalhe extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).accentColor,
         title: Html(
           data: "<h2>${noticia.title}<h2>",
           style: {
             "h2": Style(
               color: Colors.white,
-              padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-              margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
             ),
           },
-          ),
-      ),
+        ),
+        centerTitle: false,
+        titleSpacing: 0.0,
+        ),
       body: buildNoticia(),
     );
   }
