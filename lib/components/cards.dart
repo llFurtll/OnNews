@@ -13,7 +13,7 @@ class CardComponent extends StatelessWidget {
     return Card(
       margin: EdgeInsets.fromLTRB(15, 15, 15, 30),
       clipBehavior: Clip.antiAliasWithSaveLayer,
-      shadowColor: Colors.lightBlue,
+      shadowColor: Theme.of(context).accentColor,
       child: InkWell(
         onTap: () {
           Navigator.push(

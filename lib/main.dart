@@ -14,7 +14,7 @@ class OnNewsState extends State<OnNews> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        accentColor: Colors.red,
+        accentColor: Colors.orange,
       ),
       home: Home(),
     );
