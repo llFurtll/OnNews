@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ui';
 import 'package:OnNews/api/future_noticias.dart';
 import 'package:OnNews/api/noticias.dart';
 import 'package:flutter/material.dart';
