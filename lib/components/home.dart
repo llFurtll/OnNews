@@ -17,6 +17,8 @@ class HomeState extends State<Home> {
 
   GlobalKey<ScaffoldState> key = GlobalKey();
 
+  ScrollController scroll = ScrollController();
+
   @override
   initState() {
     super.initState();
@@ -36,6 +38,7 @@ class HomeState extends State<Home> {
           }
           return ListView.builder(
             itemCount: 100,
+            controller: scroll,
             itemBuilder: (context, index) {
               return CardComponent(
                 noticia: snapshot.data[index],
@@ -54,13 +57,10 @@ class HomeState extends State<Home> {
         key: key,
         drawer: DrawerComponent(),
         body: Center(
-          child: Container(
-            child: buildList(),
-            height: 0,
-          ),
+          child: buildList(),
         ),
       ),
-      floatingActionButton: ButtonComponent(futureNoticia: futureNoticia),
+      floatingActionButton: ButtonComponent(futureNoticia: futureNoticia, scroll: scroll),
     );
   }
 }

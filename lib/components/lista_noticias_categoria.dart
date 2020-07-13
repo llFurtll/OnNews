@@ -18,6 +18,8 @@ class ListaNoticiasCategoria extends StatefulWidget {
 class ListaNoticiasCategoriaState extends State<ListaNoticiasCategoria> {
   String categoria;
   Future<List<Noticia>> futureNoticia;
+  
+  ScrollController scroll = ScrollController();
 
   ListaNoticiasCategoriaState({this.categoria});
 
@@ -53,6 +55,7 @@ class ListaNoticiasCategoriaState extends State<ListaNoticiasCategoria> {
         }
         return ListView.builder(
           itemCount: 100,
+          controller: scroll,
           itemBuilder: (context, index) {
             return CardComponent(
               noticia: snapshot.data[index],
@@ -86,7 +89,7 @@ class ListaNoticiasCategoriaState extends State<ListaNoticiasCategoria> {
       body: Center(
         child: buildList(),
       ),
-      floatingActionButton: ButtonComponent(futureNoticia: futureNoticia),
+      floatingActionButton: ButtonComponent(futureNoticia: futureNoticia, scroll: scroll),
     );
   }
 }

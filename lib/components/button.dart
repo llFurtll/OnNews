@@ -1,35 +1,32 @@
 import 'dart:async';
-import 'package:OnNews/api/future_noticias.dart';
 import 'package:OnNews/api/noticias.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 class ButtonComponent extends StatefulWidget {
   Future<List<Noticia>> futureNoticia;
+  ScrollController scroll = ScrollController();
   
-  ButtonComponent({this.futureNoticia});
+  ButtonComponent({this.futureNoticia, this.scroll});
 
   @override
-  ButtonComponentState createState() => ButtonComponentState(futureNoticia: futureNoticia);
+  ButtonComponentState createState() => ButtonComponentState(futureNoticia: futureNoticia, scroll: scroll);
 }
 
 class ButtonComponentState extends State<ButtonComponent> {
   Future<List<Noticia>> futureNoticia;
 
-  ButtonComponentState({this.futureNoticia});
-
   ScrollController scroll = ScrollController();
+
+  ButtonComponentState({this.futureNoticia, this.scroll});
 
   @override
   initState() {
     super.initState();
   }
 
-  backPositionTop() {
-    scroll.animateTo(
-      0.0, 
-      duration: Duration(seconds: 2), 
-      curve: Curves.fastOutSlowIn);
+  backPositionListTop() {
+    return scroll.animateTo(0.0, duration: Duration(seconds: 2), curve: Curves.fastOutSlowIn);
   }
   
   buildButton() {
@@ -75,9 +72,7 @@ class ButtonComponentState extends State<ButtonComponent> {
               backgroundColor: Theme.of(context).accentColor,
               foregroundColor: Colors.white,
               label: "Voltar para o topo",
-              onTap: () {
-                backPositionTop();
-              },
+              onTap: () => { backPositionListTop() },
             ),
           ],
         );
