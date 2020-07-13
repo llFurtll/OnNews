@@ -54,7 +54,10 @@ class HomeState extends State<Home> {
         key: key,
         drawer: DrawerComponent(),
         body: Center(
-          child: buildList(),
+          child: Container(
+            child: buildList(),
+            height: 0,
+          ),
         ),
       ),
       floatingActionButton: ButtonComponent(futureNoticia: futureNoticia),

@@ -86,7 +86,7 @@ class ListaNoticiasCategoriaState extends State<ListaNoticiasCategoria> {
       body: Center(
         child: buildList(),
       ),
-      floatingActionButton: ButtonComponent(futureNoticia: futureNoticia,),
+      floatingActionButton: ButtonComponent(futureNoticia: futureNoticia),
     );
   }
 }

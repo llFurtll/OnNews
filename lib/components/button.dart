@@ -60,7 +60,7 @@ class ButtonComponentState extends State<ButtonComponent> {
               label: "Atualizar Lista",
               onTap: () {
                 setState(() {
-                  this.futureNoticia = fetchNoticia();
+                  this.futureNoticia = futureNoticia;
                   Timer(Duration(seconds: 1), () {
                     final snackbar = SnackBar(
                       content: Text("Lista Atualizada"),
