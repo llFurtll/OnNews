@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:OnNews/api/future_noticias.dart';
 import 'package:OnNews/api/noticias.dart';
 import 'package:OnNews/components/button.dart';
+import 'package:OnNews/components/search.dart';
 import 'package:flutter/material.dart';
 import 'appbar.dart';
 import 'cards.dart';
@@ -19,6 +20,8 @@ class HomeState extends State<Home> {
 
   ScrollController scroll = ScrollController();
 
+  TextEditingController editingController = TextEditingController();
+
   @override
   initState() {
     super.initState();
@@ -27,25 +30,42 @@ class HomeState extends State<Home> {
 
   buildList() {
     return FutureBuilder<List<Noticia>>(
-        future: futureNoticia,
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (snapshot.hasError) {
-            return Text("$snapshot.error");
-          }
-          return ListView.builder(
-            itemCount: 100,
-            controller: scroll,
-            itemBuilder: (context, index) {
-              return CardComponent(
-                noticia: snapshot.data[index],
-              );
-            },
+      future: futureNoticia,
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return Center(
+            child: CircularProgressIndicator(),
           );
-        });
+        } else if (snapshot.hasError) {
+          return Text("$snapshot.error");
+        }
+        return ListView.builder(
+          itemCount: 100,
+          controller: scroll,
+          itemBuilder: (context, index) {
+            return CardComponent(
+              noticia: snapshot.data[index],
+            );
+          },
+        );
+      }
+    );
+  }
+
+  buildHome() {
+    return Container(
+      child: Column(
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: BuildSearch(noticias: futureNoticia, editingController: editingController),
+          ),
+          Expanded(
+            child: buildList(),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -56,9 +76,7 @@ class HomeState extends State<Home> {
       body: Scaffold(
         key: key,
         drawer: DrawerComponent(),
-        body: Center(
-          child: buildList(),
-        ),
+        body: buildHome(),
       ),
       floatingActionButton: ButtonComponent(futureNoticia: futureNoticia, scroll: scroll),
     );

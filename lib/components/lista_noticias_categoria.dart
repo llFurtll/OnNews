@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:OnNews/api/future_noticias.dart';
 import 'package:OnNews/api/noticias.dart';
 import 'package:OnNews/components/button.dart';
+import 'package:OnNews/components/search.dart';
 import 'package:flutter/material.dart';
 import 'cards.dart';
 
@@ -22,6 +23,8 @@ class ListaNoticiasCategoriaState extends State<ListaNoticiasCategoria> {
   ScrollController scroll = ScrollController();
 
   ListaNoticiasCategoriaState({this.categoria});
+
+  TextEditingController editingController = TextEditingController();
 
   Map listaNoticias = {
     "1": "Cascavel",
@@ -81,14 +84,28 @@ class ListaNoticiasCategoriaState extends State<ListaNoticiasCategoria> {
     );
   }
 
+  buildHome() {
+    return Container(
+      child: Column(
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: BuildSearch(noticias: futureNoticia, editingController: editingController),
+          ),
+          Expanded(
+            child: buildList(),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       primary: true,
       appBar: buildAppbar(context),
-      body: Center(
-        child: buildList(),
-      ),
+      body: buildHome(),
       floatingActionButton: ButtonComponent(futureNoticia: futureNoticia, scroll: scroll),
     );
   }
