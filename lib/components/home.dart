@@ -40,7 +40,7 @@ class HomeState extends State<Home> {
           return Text("$snapshot.error");
         }
         return ListView.builder(
-          itemCount: 100,
+          itemCount: snapshot.data.length,
           controller: scroll,
           itemBuilder: (context, index) {
             return CardComponent(
@@ -58,7 +58,7 @@ class HomeState extends State<Home> {
         children: <Widget>[
           Padding(
             padding: EdgeInsets.all(8.0),
-            child: BuildSearch(noticias: futureNoticia, editingController: editingController),
+            child: BuildSearch(),
           ),
           Expanded(
             child: buildList(),

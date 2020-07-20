@@ -24,8 +24,6 @@ class ListaNoticiasCategoriaState extends State<ListaNoticiasCategoria> {
 
   ListaNoticiasCategoriaState({this.categoria});
 
-  TextEditingController editingController = TextEditingController();
-
   Map listaNoticias = {
     "1": "Cascavel",
     "2": "Esportes",
@@ -90,7 +88,7 @@ class ListaNoticiasCategoriaState extends State<ListaNoticiasCategoria> {
         children: <Widget>[
           Padding(
             padding: EdgeInsets.all(8.0),
-            child: BuildSearch(noticias: futureNoticia, editingController: editingController),
+            child: BuildSearch(),
           ),
           Expanded(
             child: buildList(),

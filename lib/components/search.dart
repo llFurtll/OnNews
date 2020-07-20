@@ -1,50 +1,21 @@
 import 'package:OnNews/api/noticias.dart';
 import 'package:flutter/material.dart';
-
 class BuildSearch extends StatefulWidget {
   Future<List<Noticia>> noticias;
-  TextEditingController editingController = TextEditingController();
+  TextEditingController editingController;
 
   BuildSearch({this.noticias, this.editingController});
 
   @override
-  BuildSearchState createState() => BuildSearchState(
-      noticias: noticias, editingController: editingController);
+  BuildSearchState createState() => BuildSearchState();
 }
 
 class BuildSearchState extends State<BuildSearch> {
-  TextEditingController editingController = TextEditingController();
-  Future<List<Noticia>> noticias;
 
-  BuildSearchState({this.noticias, this.editingController});
-
-  filtrarNoticias(String query, Future<List<Noticia>> listaNoticia) {
-    Future<List<Noticia>> noticiasSalvas = listaNoticia;
-    if (query.isNotEmpty) {
-      Future<List<Noticia>> noticiasFiltradas = listaNoticia;
-      listaNoticia.then((noticias) {
-        noticias.forEach((elementoNoticia) {
-          if (elementoNoticia.title.contains(query)) {
-            setState(() {
-              noticiasFiltradas.then((value) {
-                value.clear();
-                value.add(elementoNoticia);
-              });
-              listaNoticia = noticiasFiltradas;
-            });
-          }
-        });
-      });
-      return;
-    }
-  }
-
-  buildSearch(TextEditingController editingController) {
+  buildSearch() {
     return TextField(
       onChanged: (value) {
-        filtrarNoticias(value, noticias);
       },
-      controller: editingController,
       decoration: InputDecoration(
         labelText: "Pesquisar",
         hintText: "Pesquisar",
@@ -57,6 +28,6 @@ class BuildSearchState extends State<BuildSearch> {
 
   @override
   Widget build(BuildContext context) {
-    return buildSearch(editingController);
+    return buildSearch();
   }
 }
