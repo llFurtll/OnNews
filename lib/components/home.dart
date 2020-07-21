@@ -28,9 +28,9 @@ class HomeState extends State<Home> {
     futureNoticia = fetchNoticia();
   }
 
-  buildList() {
+  buildList(Future<List<Noticia>> noticias) {
     return FutureBuilder<List<Noticia>>(
-      future: futureNoticia,
+      future: noticias,
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return Center(
@@ -51,17 +51,16 @@ class HomeState extends State<Home> {
       }
     );
   }
-
   buildHome() {
     return Container(
       child: Column(
         children: <Widget>[
           Padding(
             padding: EdgeInsets.all(8.0),
-            child: BuildSearch(),
+            child: BuildSearch(filtrarNoticias: () {}, editingController: editingController),
           ),
           Expanded(
-            child: buildList(),
+            child: buildList(futureNoticia),
           ),
         ],
       ),

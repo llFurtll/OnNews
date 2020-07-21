@@ -1,21 +1,27 @@
-import 'package:OnNews/api/noticias.dart';
 import 'package:flutter/material.dart';
+
 class BuildSearch extends StatefulWidget {
-  Future<List<Noticia>> noticias;
-  TextEditingController editingController;
+  Function filtrarNoticias;
+  TextEditingController editingController = TextEditingController();
 
-  BuildSearch({this.noticias, this.editingController});
-
+  BuildSearch({this.filtrarNoticias, this.editingController});
+  
   @override
-  BuildSearchState createState() => BuildSearchState();
+  BuildSearchState createState() => BuildSearchState(filtrarNoticias: filtrarNoticias, editingController: editingController);
 }
 
 class BuildSearchState extends State<BuildSearch> {
+  Function filtrarNoticias;
+  TextEditingController editingController = TextEditingController();
+
+  BuildSearchState({this.filtrarNoticias, this.editingController});
 
   buildSearch() {
     return TextField(
       onChanged: (value) {
+        filtrarNoticias();
       },
+      controller: editingController,
       decoration: InputDecoration(
         labelText: "Pesquisar",
         hintText: "Pesquisar",
