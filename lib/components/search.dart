@@ -1,25 +1,10 @@
 import 'package:flutter/material.dart';
 
-class BuildSearch extends StatefulWidget {
-  Function filtrarNoticias;
-  TextEditingController editingController = TextEditingController();
-
-  BuildSearch({this.filtrarNoticias, this.editingController});
-  
-  @override
-  BuildSearchState createState() => BuildSearchState(filtrarNoticias: filtrarNoticias, editingController: editingController);
-}
-
-class BuildSearchState extends State<BuildSearch> {
-  Function filtrarNoticias;
-  TextEditingController editingController = TextEditingController();
-
-  BuildSearchState({this.filtrarNoticias, this.editingController});
-
-  buildSearch() {
+class BuildSearch {
+  static buildSearch(TextEditingController editingController, Function filtrarNoticias(String value)) {
     return TextField(
       onChanged: (value) {
-        filtrarNoticias();
+        filtrarNoticias(value);
       },
       controller: editingController,
       decoration: InputDecoration(
@@ -30,10 +15,5 @@ class BuildSearchState extends State<BuildSearch> {
             borderRadius: BorderRadius.all(Radius.circular(25.0))),
       ),
     );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return buildSearch();
   }
 }

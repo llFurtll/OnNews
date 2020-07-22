@@ -28,9 +28,9 @@ class HomeState extends State<Home> {
     futureNoticia = fetchNoticia();
   }
 
-  buildList(Future<List<Noticia>> noticias) {
+  buildList() {
     return FutureBuilder<List<Noticia>>(
-      future: noticias,
+      future: futureNoticia,
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return Center(
@@ -51,16 +51,21 @@ class HomeState extends State<Home> {
       }
     );
   }
+
   buildHome() {
     return Container(
       child: Column(
         children: <Widget>[
           Padding(
             padding: EdgeInsets.all(8.0),
-            child: BuildSearch(filtrarNoticias: () {}, editingController: editingController),
+            child: BuildSearch.buildSearch(editingController, (String value) {
+              if (value.isNotEmpty) {
+                print(value);
+              }
+            }),
           ),
           Expanded(
-            child: buildList(futureNoticia),
+            child: buildList(),
           ),
         ],
       ),
@@ -77,7 +82,8 @@ class HomeState extends State<Home> {
         drawer: DrawerComponent(),
         body: buildHome(),
       ),
-      floatingActionButton: ButtonComponent(futureNoticia: futureNoticia, scroll: scroll),
+      floatingActionButton:
+          ButtonComponent(futureNoticia: futureNoticia, scroll: scroll),
     );
   }
 }

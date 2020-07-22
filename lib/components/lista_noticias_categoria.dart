@@ -19,8 +19,10 @@ class ListaNoticiasCategoria extends StatefulWidget {
 class ListaNoticiasCategoriaState extends State<ListaNoticiasCategoria> {
   String categoria;
   Future<List<Noticia>> futureNoticia;
-  
+
   ScrollController scroll = ScrollController();
+
+  TextEditingController editingController = TextEditingController();
 
   ListaNoticiasCategoriaState({this.categoria});
 
@@ -88,7 +90,11 @@ class ListaNoticiasCategoriaState extends State<ListaNoticiasCategoria> {
         children: <Widget>[
           Padding(
             padding: EdgeInsets.all(8.0),
-            child: BuildSearch(),
+            child: BuildSearch.buildSearch(editingController, (String value) {
+              if (value.isNotEmpty) {
+                print(value);
+              }
+            }),
           ),
           Expanded(
             child: buildList(),
@@ -104,7 +110,8 @@ class ListaNoticiasCategoriaState extends State<ListaNoticiasCategoria> {
       primary: true,
       appBar: buildAppbar(context),
       body: buildHome(),
-      floatingActionButton: ButtonComponent(futureNoticia: futureNoticia, scroll: scroll),
+      floatingActionButton:
+          ButtonComponent(futureNoticia: futureNoticia, scroll: scroll),
     );
   }
 }
