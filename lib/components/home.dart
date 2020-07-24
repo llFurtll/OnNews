@@ -1,8 +1,11 @@
+import 'dart:ffi';
+
 import 'package:OnNews/api/future_noticias.dart';
 import 'package:OnNews/api/noticias.dart';
 import 'package:OnNews/components/button.dart';
 import 'package:OnNews/components/search.dart';
 import 'package:flutter/material.dart';
+import '../api/future_noticias.dart';
 import 'appbar.dart';
 import 'cards.dart';
 import 'drawer.dart';
@@ -36,12 +39,12 @@ class HomeState extends State<Home> {
     });
   }
 
-  Future<Null> refresh() async {
-    await Future.delayed(Duration(seconds: 2));
+  Future<void> refresh() async {
+    var noticias = await fetchNoticia();
 
-    setState(() {});
-
-    return null;
+    setState(() {
+      futureNoticia = noticias;
+    });
   }
 
   buildList() {
