@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:OnNews/api/future_noticias.dart';
 import 'package:OnNews/api/noticias.dart';
 import 'package:OnNews/components/button.dart';
@@ -14,7 +13,8 @@ class Home extends StatefulWidget {
 }
 
 class HomeState extends State<Home> {
-  Future<List<Noticia>> futureNoticia;
+  List<Noticia> futureNoticia;
+  var listaNoticias = <Widget>[];
 
   GlobalKey<ScaffoldState> key = GlobalKey();
 
@@ -25,30 +25,39 @@ class HomeState extends State<Home> {
   @override
   initState() {
     super.initState();
-    futureNoticia = fetchNoticia();
+    carregarNoticias();
+  }
+
+  carregarNoticias() async {
+    var noticias = await fetchNoticia();
+
+    setState(() {
+      futureNoticia = noticias;
+    });
+  }
+
+  Future<Null> refresh() async {
+    await Future.delayed(Duration(seconds: 2));
+
+    setState(() {});
+
+    return null;
   }
 
   buildList() {
-    return FutureBuilder<List<Noticia>>(
-      future: futureNoticia,
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        } else if (snapshot.hasError) {
-          return Text("$snapshot.error");
-        }
-        return ListView.builder(
-          itemCount: snapshot.data.length,
-          controller: scroll,
-          itemBuilder: (context, index) {
-            return CardComponent(
-              noticia: snapshot.data[index],
-            );
-          },
-        );
+    if (futureNoticia != null) {
+      for (Noticia noticia in futureNoticia) {
+        listaNoticias.add(CardComponent(noticia: noticia));
       }
+    } else {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+
+    return ListView(
+      controller: scroll,
+      children: listaNoticias,
     );
   }
 
@@ -80,10 +89,12 @@ class HomeState extends State<Home> {
       body: Scaffold(
         key: key,
         drawer: DrawerComponent(),
-        body: buildHome(),
+        body: RefreshIndicator(
+          child: buildHome(),
+          onRefresh: refresh,
+        ),
       ),
-      floatingActionButton:
-          ButtonComponent(futureNoticia: futureNoticia, scroll: scroll),
+      floatingActionButton: ButtonComponent(scroll: scroll),
     );
   }
 }
