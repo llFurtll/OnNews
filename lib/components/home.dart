@@ -39,7 +39,7 @@ class HomeState extends State<Home> {
     });
   }
 
-  Future<void> refresh() async {
+  Future<void> refreshListaNoticias() async {
     var noticias = await fetchNoticia();
 
     setState(() {
@@ -94,7 +94,7 @@ class HomeState extends State<Home> {
         drawer: DrawerComponent(),
         body: RefreshIndicator(
           child: buildHome(),
-          onRefresh: refresh,
+          onRefresh: refreshListaNoticias,
         ),
       ),
       floatingActionButton: ButtonComponent(scroll: scroll),
