@@ -1,67 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 class ButtonComponent extends StatefulWidget {
-  ScrollController scroll = ScrollController();
+  ScrollController scroll;
 
   ButtonComponent({this.scroll});
 
   @override
-  ButtonComponentState createState() =>
-      ButtonComponentState(scroll: scroll);
+  ButtonComponentState createState() => ButtonComponentState(scroll: scroll);
 }
 
 class ButtonComponentState extends State<ButtonComponent> {
-  ScrollController scroll = ScrollController();
+  ScrollController scroll;
 
   ButtonComponentState({this.scroll});
-
-  @override
-  initState() {
-    super.initState();
-  }
 
   backPositionListTop() {
     return scroll.animateTo(0.0,
         duration: Duration(seconds: 2), curve: Curves.fastOutSlowIn);
   }
 
-  buildButton() {
-    return Builder(
-      builder: (BuildContext context) {
-        return SpeedDial(
-          marginBottom: 20,
-          marginRight: 18,
-          animatedIcon: AnimatedIcons.menu_close,
-          animatedIconTheme: IconThemeData(size: 22.0),
-          visible: true,
-          closeManually: false,
-          curve: Curves.bounceIn,
-          overlayColor: Colors.white,
-          overlayOpacity: 0.5,
-          onOpen: () {},
-          onClose: () {},
-          tooltip: "Ações",
-          backgroundColor: Theme.of(context).accentColor,
-          foregroundColor: Colors.white,
-          elevation: 8.0,
-          shape: CircleBorder(),
-          children: [
-            SpeedDialChild(
-              child: Icon(Icons.arrow_upward),
-              backgroundColor: Theme.of(context).accentColor,
-              foregroundColor: Colors.white,
-              label: "Voltar para o topo",
-              onTap: () => {backPositionListTop()},
-            ),
-          ],
-        );
+  buildButton(BuildContext context) {
+    return FloatingActionButton(
+      onPressed: () {
+        backPositionListTop();
       },
+      child: Icon(
+        Icons.arrow_upward,
+        color: Colors.white,
+      ),
+      backgroundColor: Theme.of(context).accentColor,
+      tooltip: "Voltar ao topo da Lista",
     );
+  }
+
+  showButton(BuildContext context) {
+    return buildButton(context);
   }
 
   @override
   Widget build(BuildContext context) {
-    return buildButton();
+    return showButton(context);
   }
 }

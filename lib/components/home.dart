@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:OnNews/api/future_noticias.dart';
 import 'package:OnNews/api/noticias.dart';
 import 'package:OnNews/components/button.dart';
@@ -32,14 +30,6 @@ class HomeState extends State<Home> {
   }
 
   carregarNoticias() async {
-    var noticias = await fetchNoticia();
-
-    setState(() {
-      futureNoticia = noticias;
-    });
-  }
-
-  Future<void> refreshListaNoticias() async {
     var noticias = await fetchNoticia();
 
     setState(() {
@@ -94,7 +84,9 @@ class HomeState extends State<Home> {
         drawer: DrawerComponent(),
         body: RefreshIndicator(
           child: buildHome(),
-          onRefresh: refreshListaNoticias,
+          onRefresh: () async {
+            setState(() {});
+          }
         ),
       ),
       floatingActionButton: ButtonComponent(scroll: scroll),
