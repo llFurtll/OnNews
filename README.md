@@ -1,16 +1,7 @@
 # OnNews
 
-A new Flutter project.
+Um projeto em Flutter que lista notícias.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Projeto iniciado (ainda não terminado)
+Esse projeto teve como finalidade em melhorar meus conhecimentos em Flutter.
+Não está finalizado ainda, por motivos de estar ocupado com outros fins como estudos, que envolve o trabalho e especializações.
